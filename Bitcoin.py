@@ -3,12 +3,14 @@ import tkinter as tk
 from datetime import datetime
 
 def trackBitcoin():
-    url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,EUR"
+    url = "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,GBP"
     response = requests.get(url).json()
-    price = response["USD"]
+    price = response["GBP"]
+    price2 = response["USD"]
     time = datetime.now().strftime("%H:%M:%S")
 
-    labelPrice.config(text = str(price) + " $")
+    labelPrice2.config(text = "£" + str(price)  )
+    labelPrice.config(text = str(price2) + " $")
     labelTime.config(text = "Updated at: " + time)
 
     canvas.after(1000, trackBitcoin)
@@ -26,6 +28,9 @@ label.pack(pady = 20)
 
 labelPrice = tk.Label(canvas, font = f2)
 labelPrice.pack(pady = 20)
+
+labelPrice2 = tk.Label(canvas, font = f2)
+labelPrice2.pack(pady = 20)
 
 labelTime = tk.Label(canvas, font = f3)
 labelTime.pack(pady = 20)
